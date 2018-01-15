@@ -24,15 +24,16 @@ init:
 
 before_build:
   # Display .NET Core version
-  - cmd: dotnet --version
+  - cmd: dotnet --info
   # Display minimal restore text
   - cmd: dotnet restore --verbosity quiet
 
 build_script:
-  - dotnet build -c %CONFIGURATION% -v minimal /p:Version=%APPVEYOR_BUILD_VERSION%
+  - dotnet build -c %CONFIGURATION% -v minimal /p:Version=%APPVEYOR_BUILD_VERSION% --no-restore
 
 test_script:
-  - dotnet pack -c %CONFIGURATION% /p:Version=%APPVEYOR_BUILD_VERSION% --no-build
+  - dotnet test tests\OpenRealEstate.NET.Core.Tests -c %CONFIGURATION% -v minimal --no-restore --no-build
+  - dotnet pack -c %CONFIGURATION% /p:Version=%APPVEYOR_BUILD_VERSION% --no-restore --no-build
 
 artifacts:
   - path: '**\*.nupkg'
