@@ -32,18 +32,30 @@ namespace OpenRealEstate.NET.Core
 
         public override string ToString()
         {
-            return ToString(true);
+            return ToString(true, true, true);
         }
 
-        public string ToString(bool isLatLongIncluded)
+        public string ToString(bool isStreetAndStreetNumberIncluded,
+                               bool isCountryCodeIncluded, 
+                               bool isLatLongIncluded)
         {
             var address = new StringBuilder();
-            
-            address.Append(StreetNumber);
-            address.PrependWithDelimeter(Street, " ");
+
+            if (isStreetAndStreetNumberIncluded)
+            {
+                address.Append(StreetNumber);
+                address.PrependWithDelimeter(Street, " ");
+            }
+
+            // Need a bare minimum ...
             address.PrependWithDelimeter(Suburb);
             address.PrependWithDelimeter(State);
-            address.PrependWithDelimeter(CountryIsoCode);
+
+
+            if (isCountryCodeIncluded)
+            {
+                address.PrependWithDelimeter(CountryIsoCode);
+            }
 
             if (isLatLongIncluded)
             {
@@ -58,7 +70,5 @@ namespace OpenRealEstate.NET.Core
 
             return address.ToString();
         }
-
-        
     }
 }
