@@ -78,9 +78,15 @@ namespace OpenRealEstate.Core
         /// </summary>
         public string DisplayAddress { get; set; }
 
+        /// <summary>
+        /// Nice common address template: StreetNumber StreetName, Suburb, State Postcode
+        /// </summary>
+        /// <example>1/2 Smith Street, Melbourne, Victoria 3000</example>
+        /// <remarks>- This will convert any abbreviated 'State' value to it's 'long form'. e.g. VIC => Victoria.<br/>- Use the <code>ToFormattedAddress</code> to customize an address.</remarks>
+        /// <returns>A nicely formatted address.</returns>
         public override string ToString()
         {
-            return ToFormattedAddress(true, StateReplacementType.DontReplace, true, true, true);
+            return ToFormattedAddress(true, StateReplacementType.ReplaceToLongText, false, true, false);
         }
 
         /// <summary>

@@ -5,6 +5,20 @@ namespace OpenRealEstate.Core.Tests.Address
 {
     public class ToFormattedAddressTests
     {
+        private Core.Address FakeAddress { get; } = new Core.Address
+                                                    {
+                                                        StreetNumber = "10-A",
+                                                        Street = "Something Street",
+                                                        Suburb = "RICHMOND",
+                                                        Municipality = "Yarra",
+                                                        State = "vic",
+                                                        Postcode = "3121",
+                                                        CountryIsoCode = "AU",
+                                                        DisplayAddress = "This is some display address",
+                                                        Latitude = 1.1m,
+                                                        Longitude = 2.2m
+                                                    };
+
         [Theory]
         [InlineData(true, StateReplacementType.DontReplace, true, true, true, "10-A Something Street, RICHMOND, vic, AU 3121; Lat: 1.10000 Long: 2.20000")] // Full string.
         [InlineData(true, StateReplacementType.DontReplace, true, true, false, "10-A Something Street, RICHMOND, vic, AU 3121")] // Full string, no lat/long.
@@ -22,26 +36,28 @@ namespace OpenRealEstate.Core.Tests.Address
                                                                                     string expectedformattedAddress)
         {
             // Arrange.
-            var address = new Core.Address
-            {
-                StreetNumber = "10-A",
-                Street = "Something Street",
-                Suburb = "RICHMOND",
-                Municipality = "Yarra",
-                State = "vic",
-                Postcode = "3121",
-                CountryIsoCode = "AU",
-                DisplayAddress = "This is some display address",
-                Latitude = 1.1m,
-                Longitude = 2.2m
-            };
+            
 
             // Act.
-            var formattedAddress = address.ToFormattedAddress(isStreetAndStreetNumberIncluded,
-                                                              stateReplacementType,
-                                                              isCountryCodeIncluded,
-                                                              isPostCodeIncluded,
-                                                              isLatLongIncluded);
+            var formattedAddress = FakeAddress.ToFormattedAddress(isStreetAndStreetNumberIncluded,
+                                                                  stateReplacementType,
+                                                                  isCountryCodeIncluded,
+                                                                  isPostCodeIncluded,
+                                                                  isLatLongIncluded);
+
+            // Assert.
+            formattedAddress.ShouldBe(expectedformattedAddress);
+        }
+
+        [Fact]
+        public void GivenAnAddress_ToString_ReturnsANicelyFormattedAddress()
+        {
+            // Arrange.
+
+            var expectedformattedAddress = "10-A Something Street, RICHMOND, Victoria 3121";
+
+            // Act.
+            var formattedAddress = FakeAddress.ToString();
 
             // Assert.
             formattedAddress.ShouldBe(expectedformattedAddress);
