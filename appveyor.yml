@@ -32,7 +32,7 @@ build_script:
   - dotnet build -c %CONFIGURATION% -v minimal /p:Version=%APPVEYOR_BUILD_VERSION% --no-restore
 
 test_script:
-  - dotnet test tests\OpenRealEstate.NET.Core.Tests -c %CONFIGURATION% -v minimal --no-restore --no-build
+  - dotnet test tests\OpenRealEstate.Core.Tests -c %CONFIGURATION% -v minimal --no-restore --no-build
   - dotnet pack -c %CONFIGURATION% /p:Version=%APPVEYOR_BUILD_VERSION% --no-restore --no-build
 
 artifacts:
