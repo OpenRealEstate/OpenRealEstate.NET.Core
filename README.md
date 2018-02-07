@@ -4,7 +4,7 @@
 
 This is the main .NET domain model that represents the [OpenRealEstate](https://https://github.com/OpenRealEstate/OpenRealEstate) schema coded in C# under .NET Core.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/w3spu5y2l7phpv6i/branch/master?svg=true)](https://ci.appveyor.com/project/PureKrome/openrealestate-net-core) [![NuGet](https://img.shields.io/nuget/v/OpenRealEstate.NET.Core.svg)](https://www.nuget.org/packages/OpenRealEstate.NET.Core) [![NuGet](https://img.shields.io/nuget/dt/OpenRealEstate.NET.Core.svg)](https://www.nuget.org/packages/OpenRealEstate.NET.Core) [![MyGet Pre Release](https://img.shields.io/myget/openrealestate-net/vpre/OpenRealEstate.NET.Core.svg)]()
+[![Build status](https://ci.appveyor.com/api/projects/status/w3spu5y2l7phpv6i/branch/master?svg=true)](https://ci.appveyor.com/project/PureKrome/openrealestate-net-core) [![NuGet](https://img.shields.io/nuget/v/OpenRealEstate.Core.svg)](https://www.nuget.org/packages/OpenRealEstate.Core) [![NuGet](https://img.shields.io/nuget/dt/OpenRealEstate.Core.svg)](https://www.nuget.org/packages/OpenRealEstate.Core) [![MyGet Pre Release](https://img.shields.io/myget/openrealestate-net/vpre/OpenRealEstate.Core.svg)]()
 
 ---
 

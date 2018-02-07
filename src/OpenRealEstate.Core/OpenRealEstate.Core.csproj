@@ -13,7 +13,7 @@
     <RepositoryUrl>https://github.com/OpenRealEstate/OpenRealEstate.NET.Core</RepositoryUrl>
     <RepositoryType>c#</RepositoryType>
     <Copyright>2018</Copyright>
-    <Company>Homely</Company>
+    <Company>OpenRealEstate</Company>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.2'">
