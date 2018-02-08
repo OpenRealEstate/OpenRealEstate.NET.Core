@@ -53,6 +53,20 @@ namespace OpenRealEstate.Core
                 "Northern Territory"
             }
         };
+        private string _streetNumberStreetNameDelimeter = "/";
+
+        public string StreetNumberStreetNameDelimeter 
+        { 
+            get => _streetNumberStreetNameDelimeter; 
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+                _streetNumberStreetNameDelimeter = value;
+            }
+        }
 
         public string StreetNumber { get; set; }
 
@@ -86,7 +100,7 @@ namespace OpenRealEstate.Core
         /// <returns>A nicely formatted address.</returns>
         public override string ToString()
         {
-            return ToFormattedAddress(true, StateReplacementType.ReplaceToLongText, false, true, false);
+            return ToFormattedAddress(true, StateReplacementType.ReplaceToLongText, false, true);
         }
 
         /// <summary>
@@ -96,72 +110,78 @@ namespace OpenRealEstate.Core
         /// <param name="stateReplacementType">Do we replace the State with any pre-hardcoded values? Defaults to: DON'T REPLACE.</param>
         /// <param name="isCountryCodeIncluded">Do we include the country ISO code? Defaults to: FALSE.</param>
         /// <param name="isPostCodeIncluded">Do we include the postcode? Defaults to: FALSE.</param>
-        /// <param name="isLatLongIncluded">Do we include some Lat/Long info? Defaults to: FALSE.</param>
-        /// <returns></returns>
         public string ToFormattedAddress(bool isStreetAndStreetNumberIncluded = true,
                                          StateReplacementType stateReplacementType = StateReplacementType.DontReplace,
                                          bool isCountryCodeIncluded = false,
-                                         bool isPostCodeIncluded = false,
-                                         bool isLatLongIncluded = false)
+                                         bool isPostCodeIncluded = false)
         {
-            var address = new StringBuilder();
-
-            // Some agents don't like street numbers and names, for security reasons.
-            if (isStreetAndStreetNumberIncluded)
-            {
-                if (!string.IsNullOrWhiteSpace(StreetNumber))
-                {
-                    address.Append(StreetNumber);
-                }
-
-                if (!string.IsNullOrWhiteSpace(StreetNumber))
-                {
-                    address.PrependWithDelimeter(Street, Space);
-                }
-            }
-
-            // Need a bare minimum - which is SUBURB & STATE ...
-            if (!string.IsNullOrWhiteSpace(Suburb))
-            {
-                address.PrependWithDelimeter(Suburb);
-            }
-
-            if (!string.IsNullOrWhiteSpace(State))
-            {
-                var state = stateReplacementType == StateReplacementType.DontReplace
+            var state = string.IsNullOrWhiteSpace(State)
+                            ? null
+                            : stateReplacementType == StateReplacementType.DontReplace
                                 ? State
                                 : stateReplacementType == StateReplacementType.ReplaceToShortText
                                     ? ToShortStateString()
                                     : ToLongStateString();
 
-                address.PrependWithDelimeter(state);
-            }
+            return ToFormattedAddress(isStreetAndStreetNumberIncluded
+                                        ? StreetNumber
+                                        : null,
+                                      isStreetAndStreetNumberIncluded
+                                        ? Street
+                                        : null,
+                                      Suburb,
+                                      state,
+                                      isCountryCodeIncluded
+                                        ? CountryIsoCode
+                                        : null,
+                                      isPostCodeIncluded
+                                        ? Postcode
+                                        : null);
+        }
 
-            // Don't always want to show an ISO Code.
-            if (!string.IsNullOrWhiteSpace(CountryIsoCode) &&
-                isCountryCodeIncluded)
+        /// <summary>
+        /// Generates a nicely formatted address which is nice and human readable.
+        /// </summary>
+        public static string ToFormattedAddress(string streetNumber,
+                                                string street,
+                                                string suburb,
+                                                string state,
+                                                string countryIsoCode,
+                                                string postcode)
+        {
+            var result = new StringBuilder();
+
+            if (!string.IsNullOrWhiteSpace(streetNumber))
             {
-                address.PrependWithDelimeter(CountryIsoCode);
+                result.Append(streetNumber);
             }
 
-            if (!string.IsNullOrWhiteSpace(Postcode) &&
-                isPostCodeIncluded)
+            if (!string.IsNullOrWhiteSpace(street))
             {
-                address.PrependWithDelimeter(Postcode, Space);
+                result.PrependWithDelimeter(street, Space);
             }
 
-            if (isLatLongIncluded)
+            if (!string.IsNullOrWhiteSpace(suburb))
             {
-                address.AppendFormat("; Lat: {0} Long: {1}",
-                                     Latitude.HasValue
-                                         ? Latitude.Value.ToString("n5")
-                                         : "-",
-                                     Longitude.HasValue
-                                         ? Longitude.Value.ToString("n5")
-                                         : "-");
+                result.PrependWithDelimeter(suburb);
             }
 
-            return address.ToString();
+            if (!string.IsNullOrWhiteSpace(state))
+            {
+                result.PrependWithDelimeter(state);
+            }
+
+            if (!string.IsNullOrWhiteSpace(countryIsoCode))
+            {
+                result.PrependWithDelimeter(countryIsoCode);
+            }
+
+            if (!string.IsNullOrWhiteSpace(postcode))
+            {
+                result.PrependWithDelimeter(postcode, Space);
+            }
+
+            return result.ToString();
         }
 
         private string ToShortStateString()
