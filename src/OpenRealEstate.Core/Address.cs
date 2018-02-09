@@ -53,20 +53,6 @@ namespace OpenRealEstate.Core
                 "Northern Territory"
             }
         };
-        private string _streetNumberStreetNameDelimeter = "/";
-
-        public string StreetNumberStreetNameDelimeter 
-        { 
-            get => _streetNumberStreetNameDelimeter; 
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentNullException(nameof(value));
-                }
-                _streetNumberStreetNameDelimeter = value;
-            }
-        }
 
         public string StreetNumber { get; set; }
 
