@@ -104,10 +104,12 @@ namespace OpenRealEstate.Core
             var state = string.IsNullOrWhiteSpace(State)
                             ? null
                             : stateReplacementType == StateReplacementType.DontReplace
-                                ? State
-                                : stateReplacementType == StateReplacementType.ReplaceToShortText
-                                    ? ToShortStateString()
-                                    : ToLongStateString();
+                                ? State // Don't check or change the current 'State' value.
+                                : string.IsNullOrWhiteSpace(State)
+                                    ? State // Have nothing to check/change.
+                                    : stateReplacementType == StateReplacementType.ReplaceToShortText
+                                        ? ToShortStateString(State) // e.g. VIC.
+                                        : ToLongStateString(State); // e.g. Victoria.
 
             return ToFormattedAddress(isStreetAndStreetNumberIncluded
                                         ? StreetNumber
@@ -170,42 +172,53 @@ namespace OpenRealEstate.Core
             return result.ToString();
         }
 
-        private string ToShortStateString()
+        public static string ToShortStateString(string state)
         {
-            if (string.IsNullOrWhiteSpace(State))
+            if (string.IsNullOrWhiteSpace(state))
             {
-                return State;
+                throw new ArgumentNullException(nameof(state));
             }
 
             // Check if this key exists.
+            // Victoria -> VIC.
             foreach (var group in States)
             {
-                if (State.Equals(group[0], StringComparison.OrdinalIgnoreCase))
+                if (state.Equals(group[1], StringComparison.OrdinalIgnoreCase))
                 {
                     return group[0];
                 }
             }
 
+            // Our text might be in an abbreviated way, so lets try again.
+            // vic -> VIC.
+            foreach (var group in States)
+            {
+                if (state.Equals(group[0], StringComparison.OrdinalIgnoreCase))
+                {
+                    return group[0]; // Proper casing for this abbreviated 'State'.
+                }
+            }
+
             // Failed to find a match, to just use the original value.
-            return State;
+            return state;
         }
 
-        private string ToLongStateString()
+        public static string ToLongStateString(string state)
         {
-            if (string.IsNullOrWhiteSpace(State))
+            if (string.IsNullOrWhiteSpace(state))
             {
-                return State;
+                throw new ArgumentNullException(nameof(state));
             }
 
             foreach (var group in States)
             {
-                if (State.Equals(group[0], StringComparison.OrdinalIgnoreCase))
+                if (state.Equals(group[0], StringComparison.OrdinalIgnoreCase))
                 {
                     return group[1];
                 }
             }
 
-            return State;
+            return state;
         }
     }
 }
