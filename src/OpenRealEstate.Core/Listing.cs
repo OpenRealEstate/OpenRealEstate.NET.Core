@@ -11,8 +11,9 @@ namespace OpenRealEstate.Core
             Images = new List<Media>();
             FloorPlans = new List<Media>();
             Videos = new List<Media>();
-            Inspections = new List<Inspection>();
             Documents = new List<Media>();
+            Inspections = new List<Inspection>();
+            Links = new List<string>();
         }
 
         public abstract string ListingType { get; }
