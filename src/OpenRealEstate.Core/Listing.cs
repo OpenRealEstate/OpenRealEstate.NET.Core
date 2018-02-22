@@ -58,8 +58,17 @@ namespace OpenRealEstate.Core
 
         public override string ToString()
         {
+            var statusTypeDescription = StatusType.ToDescription();
+            var showSourceStatus = true;
+            if (!string.IsNullOrWhiteSpace(statusTypeDescription) &&
+                !string.IsNullOrWhiteSpace(SourceStatus) &&
+                statusTypeDescription.Equals(SourceStatus, StringComparison.OrdinalIgnoreCase))
+            {
+                showSourceStatus = false;
+            }
+            
             return
-                $"Agency: {(string.IsNullOrWhiteSpace(AgencyId) ? "--no Agency Id--" : AgencyId)}; Id: {(string.IsNullOrWhiteSpace(Id) ? "--No Id--" : Id)}";
+                $"Agency: {(string.IsNullOrWhiteSpace(AgencyId) ? "--no Agency Id--" : AgencyId)}; Id: {(string.IsNullOrWhiteSpace(Id) ? "--No Id--" : Id)}; {StatusType.ToDescription()}{(showSourceStatus ? string.Format(" [{0}]", SourceStatus) : string.Empty)}";
         }
     }
 }
