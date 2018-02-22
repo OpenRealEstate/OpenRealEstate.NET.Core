@@ -22,6 +22,14 @@ namespace OpenRealEstate.Core
 
         public StatusType StatusType { get; set; }
 
+        /// <summary>
+        /// The original status from the source data.
+        /// </summary>
+        /// <remarks>Various sources (e.g. REAXml, DomainXml, a custom CSV, etc.) might have their own Statuses. OpenRealEstate then maps their statuses to an OpenRealEstate status.
+        ///          During this mapping process, the original value could be lost. Some consumers of this OpenRealEstate instance might require a reference to the original status value
+        ///          so this is where the value is stored.</remarks>
+        public string SourceStatus { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public string Title { get; set; }
