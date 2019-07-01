@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using OpenRealEstate.Core.Helpers;
+using Shouldly;
+using Xunit;
+
+namespace OpenRealEstate.Core.Tests.Helpers
+{
+    public class TimeZoneInfoHelperTests
+    {
+        [Theory]
+        [InlineData("vic")]
+        [InlineData("victoria")]
+        [InlineData("new south wales")]
+        [InlineData("nsw")]
+        [InlineData("act")]
+        [InlineData("australian capital territory")]
+        [InlineData("qld")]
+        [InlineData("queensland")]
+        [InlineData("tas")]
+        [InlineData("tasmania")]
+        [InlineData("nt")]
+        [InlineData("northern territory")]
+        [InlineData("wa")]
+        [InlineData("western australia")]
+        [InlineData("sa")]
+        [InlineData("south australia")]
+        public void GivenAState_ConvertByState_ReturnsATimeZoneInfo(string state)
+        {
+            // Arrange.
+
+            // Act.
+            var timeZoneInfo = TimeZoneInfoHelper.ConvertByState(state);
+
+            // Asert.
+            timeZoneInfo.ShouldNotBeNull();
+        }
+    }
+}
