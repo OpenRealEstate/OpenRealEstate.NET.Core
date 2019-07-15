@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TimeZoneConverter;
 
 namespace OpenRealEstate.Core.Helpers
 {
@@ -37,7 +38,7 @@ namespace OpenRealEstate.Core.Helpers
             if (StateTimeZoneInfos.ContainsKey(state))
             {
                 // Do we have a match?
-                return TimeZoneInfo.FindSystemTimeZoneById(StateTimeZoneInfos[state]);
+                return TimeZoneInfo.FindSystemTimeZoneById(TZConvert.WindowsToIana(StateTimeZoneInfos[state]));
             }
 
             throw new ArgumentException($"State value '{state}' provided is not a valid Australian state.");
