@@ -5,7 +5,6 @@
     <Version>0.0.0</Version>
     <Product>OpenRealEstate - Core library</Product>
     <Authors>Justin Adler</Authors>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/OpenRealEstate/OpenRealEstate.NET.Core/master/LICENSE.txt</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/OpenRealEstate/OpenRealEstate</PackageProjectUrl>
     <Description>These are the core base class libraries that form the foundation for the .NET OpenRealEstate library.</Description>
     <PackageTags>ore ore.net realestate openrealestate</PackageTags>
@@ -14,9 +13,16 @@
     <RepositoryType>c#</RepositoryType>
     <Copyright>2018</Copyright>
     <Company>OpenRealEstate</Company>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="TimeZoneConverter" Version="3.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
   
 </Project>
