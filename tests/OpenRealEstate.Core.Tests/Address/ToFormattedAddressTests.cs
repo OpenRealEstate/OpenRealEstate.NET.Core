@@ -88,13 +88,12 @@ namespace OpenRealEstate.Core.Tests.Address
 
         [Theory]
         [InlineData(true, StateReplacementType.DontReplace, true, true, "10-A Something Street, RICHMOND, vic, AU 3121")] // Full string.
-        [InlineData(true, StateReplacementType.DontReplace, true, true, "10-A Something Street, RICHMOND, vic, AU 3121")] // Full string, no lat/long.
-        [InlineData(true, StateReplacementType.DontReplace, true, false, "10-A Something Street, RICHMOND, vic, AU")] // Full string, no postcode, no lat/long.
-        [InlineData(true, StateReplacementType.DontReplace, false, false, "10-A Something Street, RICHMOND, vic")] // No ISO, no postcode, no lat/long.
-        [InlineData(true, StateReplacementType.ReplaceToShortText, false, false, "10-A Something Street, RICHMOND, VIC")] // Replace vic->VIC, no ISO, no postcode, no lat/long.
-        [InlineData(true, StateReplacementType.ReplaceToLongText, false, false, "10-A Something Street, RICHMOND, Victoria")] // Replace vic->Victoria, no ISO, no postcode, no lat/long.
-        [InlineData(false, StateReplacementType.ReplaceToShortText, false, false, "RICHMOND, VIC")] // No street number or street, replace vic->VIC, no ISO, no postcode, no lat/long.
-        [InlineData(false, StateReplacementType.DontReplace, false, false, "RICHMOND, vic")] // No street number or street, no ISO, no postcode, no lat/long.
+        [InlineData(true, StateReplacementType.DontReplace, true, false, "10-A Something Street, RICHMOND, vic, AU")] // Full string, no postcode.
+        [InlineData(true, StateReplacementType.DontReplace, false, false, "10-A Something Street, RICHMOND, vic")] // No ISO, no postcode.
+        [InlineData(true, StateReplacementType.ReplaceToShortText, false, false, "10-A Something Street, RICHMOND, VIC")] // Replace vic->VIC, no ISO, no postcode.
+        [InlineData(true, StateReplacementType.ReplaceToLongText, false, false, "10-A Something Street, RICHMOND, Victoria")] // Replace vic->Victoria, no ISO, no postcode.
+        [InlineData(false, StateReplacementType.ReplaceToShortText, false, false, "RICHMOND, VIC")] // No street number or street, replace vic->VIC, no ISO, no postcode.
+        [InlineData(false, StateReplacementType.DontReplace, false, false, "RICHMOND, vic")] // No street number or street, no ISO, no postcode.
         public void GivenVariousOptions_ToFormattedAddress_ReturnsAFormattedAddress(bool isStreetAndStreetNumberIncluded,
                                                                                     StateReplacementType stateReplacementType,
                                                                                     bool isCountryCodeIncluded,
