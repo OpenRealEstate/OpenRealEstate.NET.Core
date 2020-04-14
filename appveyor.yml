@@ -1,15 +1,25 @@
 
 version: '{build}.0.0-dev'
-configuration: Release
-os: Visual Studio 2019
+image: Ubuntu
 pull_requests:
   do_not_increment_build_number: true
+
+
+matrix:
+  fast_finish: true
+
+
+configuration:
+  - Debug
+  - Release
+
 
 environment:
   nuget_apiKey:
     secure: jfcUvHZhgnUboplqTBDWr8mG5PIlrgBv5TA2fhhop4ZSiDxskyy+RtYyeHoduJFR
   myget_apiKey:
     secure: AguzfXNvHBkkDebTyWHK7o9OC5YL3eszT6u7PnzGq2G7ozdUypDlGGpcFsTRYHEc
+
 
 # Override the 'version' if this is a GH-tag-commit -or- this is a custom branch (i.e not 'master').
 init:
@@ -24,37 +34,48 @@ init:
 
 before_build:
   # Display .NET Core version
-  - cmd: dotnet --info
-  # Display minimal restore text
-  - cmd: dotnet restore --verbosity quiet
+  - ps: dotnet --info
+
 
 build_script:
-  - dotnet build -c %CONFIGURATION% -v minimal /p:Version=%APPVEYOR_BUILD_VERSION% --no-restore
+  - ps: dotnet restore --verbosity quiet
+  - ps: dotnet build -c $env:CONFIGURATION -v minimal /p:Version=$env:APPVEYOR_BUILD_VERSION --no-restore
+
 
 test_script:
-  - dotnet test tests\OpenRealEstate.Core.Tests -c %CONFIGURATION% -v minimal --no-restore --no-build
-  - dotnet pack -c %CONFIGURATION% /p:Version=%APPVEYOR_BUILD_VERSION% --no-restore --no-build
+  -  ps: dotnet test tests\OpenRealEstate.Core.Tests -c $env:CONFIGURATION -v minimal --no-build
+
+
+# We only:
+#   - Pack for RELEASE only.
+after_test:
+  - ps: |
+      if ($env:CONFIGURATION -eq 'Release')
+      {
+          dotnet pack src\OpenRealEstate.Core -c $env:CONFIGURATION --include-symbols -p:SymbolPackageFormat=snupkg /p:Version=$env:APPVEYOR_BUILD_VERSION --no-build
+      }
+
 
 artifacts:
   - path: '**\*.nupkg'
-    name: openrealestate-nugets
+    name: nuget-packages
     type: NuGetPackage
+  - path: '**\*.snupkg'
+    name: nuget-symbols
+    type: NuGetPackage
+
 
 deploy:
   - provider: NuGet
     server: https://www.myget.org/F/openrealestate-net/api/v2/package
     api_key:
       secure: AguzfXNvHBkkDebTyWHK7o9OC5YL3eszT6u7PnzGq2G7ozdUypDlGGpcFsTRYHEc
-    skip_symbols: true
-    artifact: openrealestate-nugets
     on:
       appveyor_repo_tag: false
   - provider: NuGet
     server: https://www.myget.org/F/openrealestate/api/v2/package
     api_key:
       secure: AguzfXNvHBkkDebTyWHK7o9OC5YL3eszT6u7PnzGq2G7ozdUypDlGGpcFsTRYHEc
-    skip_symbols: true
-    artifact: openrealestate-nugets
     on:
       branch: master
       appveyor_repo_tag: true
