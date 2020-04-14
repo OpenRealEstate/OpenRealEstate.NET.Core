@@ -14,13 +14,6 @@ configuration:
   - Release
 
 
-environment:
-  nuget_apiKey:
-    secure: jfcUvHZhgnUboplqTBDWr8mG5PIlrgBv5TA2fhhop4ZSiDxskyy+RtYyeHoduJFR
-  myget_apiKey:
-    secure: AguzfXNvHBkkDebTyWHK7o9OC5YL3eszT6u7PnzGq2G7ozdUypDlGGpcFsTRYHEc
-
-
 # Override the 'version' if this is a GH-tag-commit -or- this is a custom branch (i.e not 'master').
 init:
   - ps: |
@@ -43,7 +36,7 @@ build_script:
 
 
 test_script:
-  -  ps: dotnet test tests\OpenRealEstate.Core.Tests -c $env:CONFIGURATION -v minimal --no-build
+  -  ps: dotnet test -c $env:CONFIGURATION -v minimal --no-build
 
 
 # We only:
@@ -52,7 +45,7 @@ after_test:
   - ps: |
       if ($env:CONFIGURATION -eq 'Release')
       {
-          dotnet pack src\OpenRealEstate.Core -c $env:CONFIGURATION --include-symbols -p:SymbolPackageFormat=snupkg /p:Version=$env:APPVEYOR_BUILD_VERSION --no-build
+          dotnet pack -c $env:CONFIGURATION --include-symbols -p:SymbolPackageFormat=snupkg /p:Version=$env:APPVEYOR_BUILD_VERSION --no-build
       }
 
 
@@ -70,12 +63,16 @@ deploy:
     server: https://www.myget.org/F/openrealestate-net/api/v2/package
     api_key:
       secure: AguzfXNvHBkkDebTyWHK7o9OC5YL3eszT6u7PnzGq2G7ozdUypDlGGpcFsTRYHEc
+    artifact: nuget-packages # myget does now support symbols BUT appveyor doesn't publish it correctly
     on:
-      appveyor_repo_tag: false
+      CONFIGURATION: Release
+      APPVEYOR_REPO_TAG: false
   - provider: NuGet
     server: https://www.myget.org/F/openrealestate/api/v2/package
     api_key:
       secure: AguzfXNvHBkkDebTyWHK7o9OC5YL3eszT6u7PnzGq2G7ozdUypDlGGpcFsTRYHEc
+    artifact: nuget-packages # myget does now support symbols BUT appveyor doesn't publish it correctly
     on:
-      branch: master
-      appveyor_repo_tag: true
+      CONFIGURATION: Release
+      APPVEYOR_REPO_BRANCH: master
+      APPVEYOR_REPO_TAG: true
