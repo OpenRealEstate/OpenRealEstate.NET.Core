@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace OpenRealEstate.Core
 {
@@ -11,7 +11,10 @@ namespace OpenRealEstate.Core
 
         public UnitOfMeasure Area { get; set; }
 
-        public UnitOfMeasure Frontage { get; set; }
+        /// <summary>
+        /// Length, in meters.
+        /// </summary>
+        public decimal Frontage { get; set; }
 
         public IList<Depth> Depths { get; set; }
 
