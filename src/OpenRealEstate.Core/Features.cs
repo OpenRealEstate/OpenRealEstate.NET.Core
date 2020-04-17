@@ -1,14 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace OpenRealEstate.Core
 {
     public class Features
     {
-        public Features()
-        {
-            Tags = new HashSet<string>();
-        }
-
         public byte Bedrooms { get; set; }
 
         public byte Bathrooms { get; set; }
@@ -21,6 +16,6 @@ namespace OpenRealEstate.Core
 
         public byte LivingAreas { get; set; }
 
-        public HashSet<string> Tags { get; set; }
+        public HashSet<string> Tags { get; set; } = new HashSet<string>();
     }
 }
