@@ -1,6 +1,6 @@
 
 version: '{build}.0.0-dev'
-image: Ubuntu
+image: Visual Studio 2019
 pull_requests:
   do_not_increment_build_number: true
 
