@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net451;netstandard2.0</TargetFrameworks>
     <Version>0.0.0</Version>
     <Product>OpenRealEstate - Core library</Product>
     <Authors>Justin Adler</Authors>
