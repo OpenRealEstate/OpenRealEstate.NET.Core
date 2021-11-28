@@ -56,10 +56,6 @@ before_build:
   - dotnet --info
 
 build_script:
-  # So we can restore nugets from out private feed.
-  # NOTE: this UPDATES these sources, which should exist in the nuget.config file.
-  - ps: nuget sources update -Name "Homely (Dev @ myget)" -Source https://www.myget.org/F/homely-dev/api/v3/index.json -UserName homely -Password $env:global_myget_api_key
-
   - ps: dotnet restore --verbosity quiet
   - ps: dotnet build -c $env:CONFIGURATION -v minimal --no-restore /p:ContinuousIntegrationBuild=true /p:Version=$env:APPVEYOR_BUILD_VERSION
 
