@@ -63,7 +63,7 @@ test_script:
   - ps: |
       if ($env:CONFIGURATION -eq 'Debug')
       {
-          dotnet test -c $env:CONFIGURATION -v minimal --no-build --collect:"XPlat Code Coverage" --settings ./build/coverlet.runsettings --results-directory './CodeCoverageResults'
+          dotnet test -c $env:CONFIGURATION -v minimal --no-build --collect:"XPlat Code Coverage" --results-directory './CodeCoverageResults'
       }
       else
       {
