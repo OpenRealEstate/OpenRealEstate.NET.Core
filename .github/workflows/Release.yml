@@ -53,8 +53,14 @@ jobs:
             --api-key ${{ secrets.GITHUB_TOKEN }} \
             --source https://nuget.pkg.github.com/${{ github.repository_owner }}
 
-      - name: Publish to nuget.org
+      - name: Publish to MyGet.org
         run: |
           dotnet nuget push "./artifacts/*.nupkg" \
-            --api-key ${{ secrets.NUGET_TOKEN }} \
-            --source https://api.nuget.org/v3/index.json
+            --api-key ${{ secrets.MYGET_APIKEY }} \
+            --source https://www.myget.org/F/openrealestate-net/api/v2/package
+
+      #- name: Publish to nuget.org
+      #  run: |
+      #    dotnet nuget push "./artifacts/*.nupkg" \
+      #      --api-key ${{ secrets.NUGET_TOKEN }} \
+      #      --source https://api.nuget.org/v3/index.json
