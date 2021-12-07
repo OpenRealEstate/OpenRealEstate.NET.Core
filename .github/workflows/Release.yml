@@ -44,6 +44,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          name: NuGetPackage.${{ env.RELEASE_VERSION }}.nupkg.zip
           files: ./artifacts/*
 
       - name: Publish to GPR
@@ -53,14 +54,8 @@ jobs:
             --api-key ${{ secrets.GITHUB_TOKEN }} \
             --source https://nuget.pkg.github.com/${{ github.repository_owner }}
 
-      - name: Publish to MyGet.org
+      - name: Publish to nuget.org
         run: |
           dotnet nuget push "./artifacts/*.nupkg" \
-            --api-key ${{ secrets.MYGET_APIKEY }} \
-            --source https://www.myget.org/F/openrealestate-net/api/v2/package
-
-      #- name: Publish to nuget.org
-      #  run: |
-      #    dotnet nuget push "./artifacts/*.nupkg" \
-      #      --api-key ${{ secrets.NUGET_TOKEN }} \
-      #      --source https://api.nuget.org/v3/index.json
+            --api-key ${{ secrets.NUGET_TOKEN }} \
+            --source https://api.nuget.org/v3/index.json
