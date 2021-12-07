@@ -18,7 +18,7 @@ jobs:
         run: echo "VERSION_SUFFIX=alpha.${{ github.event.number }}" >> $GITHUB_ENV
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v1
 
       - run: dotnet restore --verbosity minimal
 
@@ -43,7 +43,7 @@ jobs:
         run: echo "VERSION_SUFFIX=alpha.${{ github.event.number }}" >> $GITHUB_ENV
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v1
 
       - run: dotnet restore --verbosity minimal
 
