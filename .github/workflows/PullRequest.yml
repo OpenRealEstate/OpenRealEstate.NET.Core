@@ -15,7 +15,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build version suffix
-        run: echo "VERSION_SUFFIX=alpha.${{ github.event.number }}" >> $GITHUB_ENV
+        run: |
+            echo "VERSION_PREFIX=${{ 100 + github.run_number }}.0.0" >> $GITHUB_ENV
+            echo "VERSION_SUFFIX=alpha" >> $GITHUB_ENV
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
