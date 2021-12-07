@@ -16,7 +16,7 @@ jobs:
 
       - name: Build version suffix
         run: |
-            echo "VERSION_PREFIX=${{ 100 + github.run_number }}.0.0" >> $GITHUB_ENV
+            echo "VERSION_PREFIX= $(( 100 + ${{ github.run_number }} )) .0.0" >> $GITHUB_ENV
             echo "VERSION_SUFFIX=alpha" >> $GITHUB_ENV
 
       - name: Setup .NET
