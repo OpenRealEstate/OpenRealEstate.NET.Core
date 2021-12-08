@@ -13,6 +13,7 @@
     <RepositoryUrl>https://github.com/OpenRealEstate/OpenRealEstate.NET.Core</RepositoryUrl>
     <RepositoryType>c#</RepositoryType>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
   </PropertyGroup>
 
   <ItemGroup>
