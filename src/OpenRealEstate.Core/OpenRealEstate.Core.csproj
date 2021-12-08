@@ -4,14 +4,15 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Product>OpenRealEstate - Core library</Product>
     <Authors>Justin Adler</Authors>
-    <PackageProjectUrl>https://github.com/OpenRealEstate/OpenRealEstate</PackageProjectUrl>
+    <Copyright>2018</Copyright>
+    <Company>OpenRealEstate</Company>
     <Description>These are the core base class libraries that form the foundation for the .NET OpenRealEstate library.</Description>
+    <PackageProjectUrl>https://github.com/OpenRealEstate/OpenRealEstate</PackageProjectUrl>
     <PackageTags>ore ore.net realestate openrealestate</PackageTags>
     <PackageIconUrl>https://avatars2.githubusercontent.com/u/7205481?s=64</PackageIconUrl>
     <RepositoryUrl>https://github.com/OpenRealEstate/OpenRealEstate.NET.Core</RepositoryUrl>
     <RepositoryType>c#</RepositoryType>
-    <Copyright>2018</Copyright>
-    <Company>OpenRealEstate</Company>
+
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
   <ItemGroup>
