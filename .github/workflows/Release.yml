@@ -37,6 +37,7 @@ jobs:
       - name: Publish artifacts
         uses: actions/upload-artifact@v3
         with:
+          name: NuGetPackage.${{ env.RELEASE_VERSION }}
           path: ./artifacts/
 
       - name: Upload release assets
@@ -44,7 +45,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: NuGetPackage.${{ env.RELEASE_VERSION }}.nupkg.zip
+          name: NuGetPackage.${{ env.RELEASE_VERSION }}
           files: ./artifacts/*
 
       - name: Publish to GPR
