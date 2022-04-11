@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Build version prefix/suffix
         run: |
@@ -24,7 +24,7 @@ jobs:
           echo "VERSION_SUFFIX=beta" >> $GITHUB_ENV
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v2
 
       - run: dotnet restore --verbosity minimal
 
@@ -35,15 +35,15 @@ jobs:
       - run: dotnet pack --configuration Release --no-build --output ./artifacts -p:VersionPrefix=$VERSION_PREFIX --version-suffix $VERSION_SUFFIX -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
 
       - name: Publish artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: NuGetPackage.${{ env.VERSION_PREFIX }}-${{ env.VERSION_SUFFIX }}.nupkg.zip
-          path: ./artifacts/*
+          path: ./artifacts/
 
       - name: Publish to GPR
         run: |
           dotnet nuget push "./artifacts/*.nupkg" \
-            --no-symbols true \
+            --no-symbols \
             --api-key ${{ secrets.GITHUB_TOKEN }} \
             --source https://nuget.pkg.github.com/${{ github.repository_owner }}
 
@@ -59,10 +59,10 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v2
 
       - run: dotnet restore --verbosity minimal
 
