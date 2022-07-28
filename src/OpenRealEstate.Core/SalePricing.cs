@@ -1,14 +1,14 @@
-﻿using System;
+using System;
 
 namespace OpenRealEstate.Core
 {
     public class SalePricing
     {
-        public decimal SalePrice { get; set; }
+        public int SalePrice { get; set; }
 
         public string SalePriceText { get; set; }
 
-        public decimal? SoldPrice { get; set; }
+        public int? SoldPrice { get; set; }
 
         public string SoldPriceText { get; set; }
 
