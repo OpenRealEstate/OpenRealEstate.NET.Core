@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 
 namespace OpenRealEstate.Core.Rental
 {
     public class RentalPricing
     {
-        public decimal RentalPrice { get; set; }
+        public int RentalPrice { get; set; }
 
         public PaymentFrequencyType PaymentFrequencyType { get; set; }
 
@@ -12,7 +12,7 @@ namespace OpenRealEstate.Core.Rental
 
         public DateTime? RentedOn { get; set; }
 
-        public decimal? Bond { get; set; }
+        public int? Bond { get; set; }
 
         public override string ToString()
         {
