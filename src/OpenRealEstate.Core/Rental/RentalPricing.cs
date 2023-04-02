@@ -6,6 +6,8 @@ namespace OpenRealEstate.Core.Rental
     {
         public int RentalPrice { get; set; }
 
+        public bool ShowRentalPrice { get; set; }
+
         public PaymentFrequencyType PaymentFrequencyType { get; set; }
 
         public string RentalPriceText { get; set; }
@@ -13,6 +15,8 @@ namespace OpenRealEstate.Core.Rental
         public DateTime? RentedOn { get; set; }
 
         public int? Bond { get; set; }
+
+        public bool DepositTaken { get; set; }
 
         public override string ToString()
         {

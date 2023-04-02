@@ -45,8 +45,6 @@ namespace OpenRealEstate.Core
 
         public IList<string> Links { get; set; } = new List<string>();
 
-        public string Authority { get; set; }
-
         public override string ToString()
         {
             var statusTypeDescription = StatusType.ToDescription();

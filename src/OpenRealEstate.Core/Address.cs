@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using OpenRealEstate.Core.Extensions;
 
@@ -54,6 +54,10 @@ namespace OpenRealEstate.Core
             }
         };
 
+        public string SubNumber { get; set; }
+
+        public string LotNumber { get; set; }
+
         public string StreetNumber { get; set; }
 
         public string Street { get; set; }
@@ -77,6 +81,8 @@ namespace OpenRealEstate.Core
         /// This is the address the agent wants to display to the public. It might not have the street number or appartment numbers or even the suburb!
         /// </summary>
         public string DisplayAddress { get; set; }
+
+        public bool StreetView { get; set; }
 
         /// <summary>
         /// Nice common address template: StreetNumber StreetName, Suburb, State Postcode

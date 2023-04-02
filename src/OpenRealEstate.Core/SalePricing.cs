@@ -8,9 +8,13 @@ namespace OpenRealEstate.Core
 
         public string SalePriceText { get; set; }
 
+        public bool ShowSalePrice { get; set; }
+
         public int? SoldPrice { get; set; }
 
         public string SoldPriceText { get; set; }
+
+        public bool ShowSoldPrice { get; set; }
 
         public DateTime? SoldOn { get; set; }
 

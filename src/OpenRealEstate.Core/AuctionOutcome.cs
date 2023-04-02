@@ -6,6 +6,6 @@ namespace OpenRealEstate.Core
     {
         public AuctionResultType Result { get; set; }
         public DateTime AuctionDate { get; set; }
-        public decimal MaxBid { get; set; }
+        public decimal? MaxBid { get; set; }
     }
 }

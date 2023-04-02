@@ -2,7 +2,7 @@ using System;
 
 namespace OpenRealEstate.Core.Residential
 {
-    public class ResidentialListing : Listing, IPropertyType, ISalePricing, IAuctionOn, IBuildingDetails, IAuctionOutcome
+    public class ResidentialListing : Listing, IPropertyType, ISalePricing, IAuctionOn, IBuildingDetails, IAuctionOutcome, ISaleDetails
     {
         public override string ListingType => "Residential";
 
@@ -17,6 +17,12 @@ namespace OpenRealEstate.Core.Residential
         public SalePricing Pricing { get; set; }
 
         public AuctionOutcome AuctionOutcome { get; set; }
+
+        public string YearBuilt { get; set; }
+
+        public string YearLastRenovated { get; set; }
+
+        public AuthorityType Authority { get; set; }
 
         public override string ToString()
         {
