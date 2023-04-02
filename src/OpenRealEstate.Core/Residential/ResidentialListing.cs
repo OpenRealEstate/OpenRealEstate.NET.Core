@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 
 namespace OpenRealEstate.Core.Residential
 {
-    public class ResidentialListing : Listing, IPropertyType, ISalePricing, IAuctionOn, IBuildingDetails
+    public class ResidentialListing : Listing, IPropertyType, ISalePricing, IAuctionOn, IBuildingDetails, IAuctionOutcome
     {
         public override string ListingType => "Residential";
 
@@ -15,6 +15,8 @@ namespace OpenRealEstate.Core.Residential
         public PropertyType PropertyType { get; set; }
 
         public SalePricing Pricing { get; set; }
+
+        public AuctionOutcome AuctionOutcome { get; set; }
 
         public override string ToString()
         {
