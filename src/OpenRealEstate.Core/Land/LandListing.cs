@@ -2,7 +2,7 @@ using System;
 
 namespace OpenRealEstate.Core.Land
 {
-    public class LandListing : Listing, ISalePricing, IAuctionOn, IAuctionOutcome, ISaleDetails
+    public class LandListing : Listing, ISalePricing, IAuctionOn, ISaleDetails
     {
         public override string ListingType => "Land";
 
@@ -15,8 +15,6 @@ namespace OpenRealEstate.Core.Land
         public DateTime? AuctionOn { get; set; }
 
         public SalePricing Pricing { get; set; }
-
-        public AuctionOutcome AuctionOutcome { get; set; }
 
         public string YearBuilt { get; set; }
 

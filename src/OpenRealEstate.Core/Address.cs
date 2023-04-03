@@ -82,8 +82,6 @@ namespace OpenRealEstate.Core
         /// </summary>
         public string DisplayAddress { get; set; }
 
-        public bool StreetView { get; set; }
-
         /// <summary>
         /// Nice common address template: StreetNumber StreetName, Suburb, State Postcode
         /// </summary>
