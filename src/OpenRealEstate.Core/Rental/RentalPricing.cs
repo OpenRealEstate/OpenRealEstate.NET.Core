@@ -14,7 +14,7 @@ namespace OpenRealEstate.Core.Rental
 
         public int? Bond { get; set; }
 
-        public bool DepositTaken { get; set; }
+        public bool HasTakenDeposit { get; set; }
 
         public override string ToString()
         {
