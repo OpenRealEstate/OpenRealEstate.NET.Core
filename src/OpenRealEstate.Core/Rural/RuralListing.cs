@@ -2,7 +2,7 @@ using System;
 
 namespace OpenRealEstate.Core.Rural
 {
-    public class RuralListing : Listing, ISalePricing, IAuctionOn, IBuildingDetails, ISaleDetails
+    public class RuralListing : Listing, ISaleDetails, IBuildingDetails
     {
         public override string ListingType => "Rural";
 
