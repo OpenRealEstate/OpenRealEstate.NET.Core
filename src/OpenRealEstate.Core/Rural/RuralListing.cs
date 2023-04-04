@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 
 namespace OpenRealEstate.Core.Rural
 {
-    public class RuralListing : Listing, ISalePricing, IAuctionOn, IBuildingDetails
+    public class RuralListing : Listing, ISalePricing, IAuctionOn, IBuildingDetails, ISaleDetails
     {
         public override string ListingType => "Rural";
 
@@ -17,6 +17,12 @@ namespace OpenRealEstate.Core.Rural
         public BuildingDetails BuildingDetails { get; set; }
 
         public SalePricing Pricing { get; set; }
+
+        public int YearBuilt { get; set; }
+
+        public int YearLastRenovated { get; set; }
+
+        public AuthorityType Authority { get; set; }
 
         public override string ToString()
         {

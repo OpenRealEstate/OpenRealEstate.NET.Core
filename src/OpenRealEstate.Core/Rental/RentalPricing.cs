@@ -14,6 +14,8 @@ namespace OpenRealEstate.Core.Rental
 
         public int? Bond { get; set; }
 
+        public bool HasTakenDeposit { get; set; }
+
         public override string ToString()
         {
             return $"Rent: {RentalPrice:C0} {PaymentFrequencyType} | {(string.IsNullOrWhiteSpace(RentalPriceText) ? "-no rent price text-" : RentalPriceText)} | Bond: {Bond:C0}";

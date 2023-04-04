@@ -55,7 +55,7 @@ namespace OpenRealEstate.Core
             {
                 showSourceStatus = false;
             }
-            
+
             return
                 $"Agency: {(string.IsNullOrWhiteSpace(AgencyId) ? "--no Agency Id--" : AgencyId)}; Id: {(string.IsNullOrWhiteSpace(Id) ? "--No Id--" : Id)}; {StatusType.ToDescription()}{(showSourceStatus ? string.Format(" [{0}]", SourceStatus) : string.Empty)}";
         }
