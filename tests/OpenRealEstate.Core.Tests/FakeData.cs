@@ -1,9 +1,11 @@
-﻿namespace OpenRealEstate.Core.Tests
+namespace OpenRealEstate.Core.Tests
 {
     public static class FakeData
     {
         public static Core.Address FakeAddress { get; } = new Core.Address
                                                           {
+                                                              SubNumber = "Sub-A",
+                                                              LotNumber = "Lot-BCD",
                                                               StreetNumber = "10-A",
                                                               Street = "Something Street",
                                                               Suburb = "RICHMOND",

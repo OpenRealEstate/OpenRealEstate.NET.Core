@@ -143,14 +143,14 @@ namespace OpenRealEstate.Core
         /// <summary>
         /// Generates a nicely formatted address which is nice and human readable.
         /// </summary>
-        public static string ToFormattedAddress(string streetNumber,
+        public static string ToFormattedAddress(string subNumber,
+                                                string lotNumber,
+                                                string streetNumber,
                                                 string street,
                                                 string suburb,
                                                 string state,
                                                 string countryIsoCode,
-                                                string postcode,
-                                                string subNumber,
-                                                string lotNumber)
+                                                string postcode)
         {
             var result = new StringBuilder();
 
