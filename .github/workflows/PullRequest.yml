@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v3
 
       - run: dotnet restore --verbosity minimal
 
@@ -24,7 +24,7 @@ jobs:
       - run: dotnet test --configuration Debug --verbosity minimal --no-build --collect:"XPlat Code Coverage" --results-directory "./.codecoverage"
 
       - name: Code coverage
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         with:
           directory: "./.codecoverage"
           fail_ci_if_error: true
@@ -42,15 +42,15 @@ jobs:
           echo "VERSION_SUFFIX=alpha" >> $GITHUB_ENV
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v3
 
       - run: dotnet restore --verbosity minimal
 
-      - run: dotnet build --configuration Release -p:ContinuousIntegrationBuild=true -p:VersionPrefix=$VERSION_PREFIX --version-suffix $VERSION_SUFFIX
+      - run: dotnet build --configuration Release -p:ContinuousIntegrationBuild=true -p:DebugType=Embedded -p:VersionPrefix=$VERSION_PREFIX --version-suffix $VERSION_SUFFIX
 
       - run: dotnet test --configuration Release --no-build
 
-      - run: dotnet pack --configuration Release --no-build --output ./artifacts -p:VersionPrefix=$VERSION_PREFIX --version-suffix $VERSION_SUFFIX -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
+      - run: dotnet pack --configuration Release --no-build --output ./artifacts -p:VersionPrefix=$VERSION_PREFIX --version-suffix $VERSION_SUFFIX
 
       - name: Publish artifacts
         uses: actions/upload-artifact@v3

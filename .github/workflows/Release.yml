@@ -1,4 +1,4 @@
-name: Publish to Nuget.org
+name: Publish to Nuget.org and GPR
 
 on:
   push:
@@ -26,13 +26,13 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v3
 
       - run: dotnet restore --verbosity minimal
 
-      - run: dotnet build --configuration Release /p:ContinuousIntegrationBuild=true /p:version=${{ env.RELEASE_VERSION }}
+      - run: dotnet build --configuration Release -p:ContinuousIntegrationBuild=true -p:DebugType=Embedded -p:version=${{ env.RELEASE_VERSION }}
 
-      - run: dotnet pack --configuration Release --no-build --output ./artifacts /p:version=${{ env.RELEASE_VERSION }} -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
+      - run: dotnet pack --configuration Release --no-build --output ./artifacts /p:version=${{ env.RELEASE_VERSION }}
 
       - name: Publish artifacts
         uses: actions/upload-artifact@v3
