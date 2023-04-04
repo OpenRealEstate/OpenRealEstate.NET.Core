@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>OpenRealEstate.Core</PackageId>
     <Product>OpenRealEstate - Core library</Product>
-    <Authors>Justin Adler</Authors>
+    <Authors>Justin Adler and awesome contributors</Authors>
     <Company>OpenRealEstate</Company>
     <Copyright>2014</Copyright>
     <Description>These are the core base class libraries that form the foundation for the .NET OpenRealEstate library.</Description>
@@ -15,6 +15,7 @@
     <RepositoryType>c#</RepositoryType>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
