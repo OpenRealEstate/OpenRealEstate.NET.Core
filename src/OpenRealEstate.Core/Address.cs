@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+
 using OpenRealEstate.Core.Extensions;
 
 namespace OpenRealEstate.Core
@@ -103,7 +104,9 @@ namespace OpenRealEstate.Core
         public string ToFormattedAddress(bool isStreetAndStreetNumberIncluded = true,
                                          StateReplacementType stateReplacementType = StateReplacementType.DontReplace,
                                          bool isCountryCodeIncluded = false,
-                                         bool isPostCodeIncluded = false)
+                                         bool isPostCodeIncluded = false,
+                                         bool isSubNumberIncluded = false,
+                                         bool isLotNumberIncluded = false)
         {
             var state = string.IsNullOrWhiteSpace(State)
                             ? null
@@ -115,7 +118,13 @@ namespace OpenRealEstate.Core
                                         ? ToShortStateString(State) // e.g. VIC.
                                         : ToLongStateString(State); // e.g. Victoria.
 
-            return ToFormattedAddress(isStreetAndStreetNumberIncluded
+            return ToFormattedAddress(isSubNumberIncluded
+                                        ? SubNumber
+                                        : null,
+                                      isLotNumberIncluded
+                                        ? LotNumber
+                                        : null,
+                                      isStreetAndStreetNumberIncluded
                                         ? StreetNumber
                                         : null,
                                       isStreetAndStreetNumberIncluded
@@ -139,13 +148,25 @@ namespace OpenRealEstate.Core
                                                 string suburb,
                                                 string state,
                                                 string countryIsoCode,
-                                                string postcode)
+                                                string postcode,
+                                                string subNumber,
+                                                string lotNumber)
         {
             var result = new StringBuilder();
 
+            if (!string.IsNullOrWhiteSpace(subNumber))
+            {
+                result.Append(subNumber);
+            }
+
+            if (!string.IsNullOrWhiteSpace(lotNumber))
+            {
+                result.PrependWithDelimeter(lotNumber, Space);
+            }
+
             if (!string.IsNullOrWhiteSpace(streetNumber))
             {
-                result.Append(streetNumber);
+                result.PrependWithDelimeter(streetNumber);
             }
 
             if (!string.IsNullOrWhiteSpace(street))

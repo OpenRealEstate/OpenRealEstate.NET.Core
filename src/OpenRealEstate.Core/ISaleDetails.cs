@@ -2,9 +2,9 @@ namespace OpenRealEstate.Core
 {
     public interface ISaleDetails
     {
-        string YearBuilt { get; set; }
+        int YearBuilt { get; set; }
 
-        string YearLastRenovated { get; set; }
+        int YearLastRenovated { get; set; }
 
         AuthorityType Authority { get; set; }
     }

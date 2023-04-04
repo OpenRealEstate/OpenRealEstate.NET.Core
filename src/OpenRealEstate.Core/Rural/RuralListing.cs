@@ -18,9 +18,9 @@ namespace OpenRealEstate.Core.Rural
 
         public SalePricing Pricing { get; set; }
 
-        public string YearBuilt { get; set; }
+        public int YearBuilt { get; set; }
 
-        public string YearLastRenovated { get; set; }
+        public int YearLastRenovated { get; set; }
 
         public AuthorityType Authority { get; set; }
 
