@@ -101,12 +101,10 @@ namespace OpenRealEstate.Core
         /// <param name="stateReplacementType">Do we replace the State with any pre-hardcoded values? Defaults to: DON'T REPLACE.</param>
         /// <param name="isCountryCodeIncluded">Do we include the country ISO code? Defaults to: FALSE.</param>
         /// <param name="isPostCodeIncluded">Do we include the postcode? Defaults to: FALSE.</param>
-        public string ToFormattedAddress(bool isStreetAndStreetNumberIncluded = true,
+        public string ToFormattedAddress(bool isSubAndLotAndStreetAndStreetNumberIncluded = true,
                                          StateReplacementType stateReplacementType = StateReplacementType.DontReplace,
                                          bool isCountryCodeIncluded = false,
-                                         bool isPostCodeIncluded = false,
-                                         bool isSubNumberIncluded = false,
-                                         bool isLotNumberIncluded = false)
+                                         bool isPostCodeIncluded = false)
         {
             var state = string.IsNullOrWhiteSpace(State)
                             ? null
@@ -118,16 +116,16 @@ namespace OpenRealEstate.Core
                                         ? ToShortStateString(State) // e.g. VIC.
                                         : ToLongStateString(State); // e.g. Victoria.
 
-            return ToFormattedAddress(isSubNumberIncluded
+            return ToFormattedAddress(isSubAndLotAndStreetAndStreetNumberIncluded
                                         ? SubNumber
                                         : null,
-                                      isLotNumberIncluded
+                                      isSubAndLotAndStreetAndStreetNumberIncluded
                                         ? LotNumber
                                         : null,
-                                      isStreetAndStreetNumberIncluded
+                                      isSubAndLotAndStreetAndStreetNumberIncluded
                                         ? StreetNumber
                                         : null,
-                                      isStreetAndStreetNumberIncluded
+                                      isSubAndLotAndStreetAndStreetNumberIncluded
                                         ? Street
                                         : null,
                                       Suburb,

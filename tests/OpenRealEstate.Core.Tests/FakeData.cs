@@ -5,7 +5,7 @@ namespace OpenRealEstate.Core.Tests
         public static Core.Address FakeAddress { get; } = new Core.Address
                                                           {
                                                               SubNumber = "Sub-A",
-                                                              LotNumber = "Lot-BCD",
+                                                              LotNumber = "LOT 123",
                                                               StreetNumber = "10-A",
                                                               Street = "Something Street",
                                                               Suburb = "RICHMOND",
