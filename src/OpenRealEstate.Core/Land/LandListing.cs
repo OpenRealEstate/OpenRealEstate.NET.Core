@@ -14,13 +14,12 @@ namespace OpenRealEstate.Core.Land
 
         public DateTime? AuctionOn { get; set; }
 
+        public AuthorityType Authority { get; set; }
         public SalePricing Pricing { get; set; }
 
-        public int YearBuilt { get; set; }
+        public int? YearBuilt { get; set; }
 
-        public int YearLastRenovated { get; set; }
-
-        public AuthorityType Authority { get; set; }
+        public int? YearLastRenovated { get; set; }
 
         public override string ToString()
         {
