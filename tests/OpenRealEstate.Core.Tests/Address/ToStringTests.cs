@@ -9,7 +9,7 @@ namespace OpenRealEstate.Core.Tests.Address
         public void GivenAnAddress_ToString_ReturnsANicelyFormattedAddress()
         {
             // Arrange.
-            var expectedformattedAddress = "Sub-A LOT 123, 10-A Something Street, RICHMOND, Victoria 3121";
+            var expectedformattedAddress = "Sub-A, LOT 123, 10-A Something Street, RICHMOND, Victoria 3121";
 
             // Act.
             var formattedAddress = FakeData.FakeAddress.ToString();

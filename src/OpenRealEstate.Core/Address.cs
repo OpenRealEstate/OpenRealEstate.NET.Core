@@ -159,12 +159,25 @@ namespace OpenRealEstate.Core
 
             if (!string.IsNullOrWhiteSpace(lotNumber))
             {
-                result.PrependWithDelimeter(lotNumber, Space);
+                result.PrependWithDelimeter(lotNumber);
             }
+
+            // Sub-A, LOT 123, 10-A Something Street ..... SUB & LOT & StreetNumber [not expected data - usually no lot with a street number]
+            // Sub-A/10-A Something Street .....           SUB & StreetNumber
+            // LOT 123, 10-A Something Street .....        LOT & StreetNumber  [not expected data - usually no lot with a street number]
+            // LOT 123 Something Street .....              LOT & Street
+
+
+            // If we have both, then it's a comma-space
+            // If we have sub-only, then it's a /
+            // If we have lot-only, then it's a comma-space
+            var streetNumberPrefix = !string.IsNullOrWhiteSpace(lotNumber)
+                ? ", " // both -or- lot-only
+                : "/"; // sub-only
 
             if (!string.IsNullOrWhiteSpace(streetNumber))
             {
-                result.PrependWithDelimeter(streetNumber);
+                result.PrependWithDelimeter(streetNumber, streetNumberPrefix);
             }
 
             if (!string.IsNullOrWhiteSpace(street))
