@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
 using FizzWare.NBuilder;
 using OpenRealEstate.Core.Extensions;
-using Shouldly;
 
 namespace OpenRealEstate.Core.Tests.ExtensionTests
 {

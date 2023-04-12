@@ -1,7 +1,3 @@
-using Shouldly;
-using System.Collections.Generic;
-using Xunit;
-
 namespace OpenRealEstate.Core.Tests.Address
 {
     public class ToFormattedAddressTests

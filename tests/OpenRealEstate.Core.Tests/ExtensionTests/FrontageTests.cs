@@ -1,5 +1,3 @@
-using Xunit;
-
 namespace OpenRealEstate.Core.Tests.ExtensionTests
 {
     public class FrontageTests : BaseSideTests

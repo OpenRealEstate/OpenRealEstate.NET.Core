@@ -1,10 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using OpenRealEstate.Core.Helpers;
-using Shouldly;
-using Xunit;
-
 namespace OpenRealEstate.Core.Tests.Helpers
 {
     public class TimeZoneInfoHelperTests
