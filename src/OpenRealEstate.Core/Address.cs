@@ -173,7 +173,10 @@ namespace OpenRealEstate.Core
             // If we have lot-only, then it's a comma-space
             var streetNumberPrefix = !string.IsNullOrWhiteSpace(lotNumber)
                 ? ", " // both -or- lot-only
-                : "/"; // sub-only
+                : !string.IsNullOrWhiteSpace(subNumber) && // We have a sub number 
+                  int.TryParse(subNumber, out _) // .. and it's a number
+                  ? "/" // sub-only and it's a number.
+                  : ", "; // sub-only but it's not a number, so we'll use a comma to make it read 'nicer'.
 
             if (!string.IsNullOrWhiteSpace(streetNumber))
             {

@@ -43,8 +43,23 @@ namespace OpenRealEstate.Core.Tests.Address
                 $"{FakeData.FakeAddress.SubNumber}, {FakeData.FakeAddress.LotNumber}, {FakeData.FakeAddress.StreetNumber} {FakeData.FakeAddress.Street}, {FakeData.FakeAddress.Suburb}, vic, {FakeData.FakeAddress.CountryIsoCode} {FakeData.FakeAddress.Postcode}"
             };
 
-            // SUB & StreetNumber
-            // e.g.Sub-A/10-A Something Street .....
+            // SUB & LOT & StreetNumber. The Sub is a number but because there is a LOT after it, we still use comma's to delimate between all the parts.
+            // e.g.111, LOT 123, 10-A Something Street .....
+            yield return new object[]
+            {
+                111,
+                FakeData.FakeAddress.LotNumber,
+                FakeData.FakeAddress.StreetNumber,
+                FakeData.FakeAddress.Street,
+                FakeData.FakeAddress.Suburb,
+                FakeData.FakeAddress.State,
+                FakeData.FakeAddress.CountryIsoCode,
+                FakeData.FakeAddress.Postcode,
+                $"{111}, {FakeData.FakeAddress.LotNumber}, {FakeData.FakeAddress.StreetNumber} {FakeData.FakeAddress.Street}, {FakeData.FakeAddress.Suburb}, vic, {FakeData.FakeAddress.CountryIsoCode} {FakeData.FakeAddress.Postcode}"
+            };
+
+            // SUB & StreetNumber. With the Sub NOT being a number, we use a comma.
+            // e.g.Sub-A, 10-A Something Street .....
             yield return new object[]
             {
                 FakeData.FakeAddress.SubNumber,
@@ -55,7 +70,22 @@ namespace OpenRealEstate.Core.Tests.Address
                 FakeData.FakeAddress.State,
                 FakeData.FakeAddress.CountryIsoCode,
                 FakeData.FakeAddress.Postcode,
-                $"{FakeData.FakeAddress.SubNumber}/{FakeData.FakeAddress.StreetNumber} {FakeData.FakeAddress.Street}, {FakeData.FakeAddress.Suburb}, vic, {FakeData.FakeAddress.CountryIsoCode} {FakeData.FakeAddress.Postcode}"
+                $"{FakeData.FakeAddress.SubNumber}, {FakeData.FakeAddress.StreetNumber} {FakeData.FakeAddress.Street}, {FakeData.FakeAddress.Suburb}, vic, {FakeData.FakeAddress.CountryIsoCode} {FakeData.FakeAddress.Postcode}"
+            };
+
+            // SUB & StreetNumber. With the Sub being a number, we use a slash.
+            // e.g.111/10-A Something Street .....
+            yield return new object[]
+            {
+                111,
+                null,
+                FakeData.FakeAddress.StreetNumber,
+                FakeData.FakeAddress.Street,
+                FakeData.FakeAddress.Suburb,
+                FakeData.FakeAddress.State,
+                FakeData.FakeAddress.CountryIsoCode,
+                FakeData.FakeAddress.Postcode,
+                $"{111}/{FakeData.FakeAddress.StreetNumber} {FakeData.FakeAddress.Street}, {FakeData.FakeAddress.Suburb}, vic, {FakeData.FakeAddress.CountryIsoCode} {FakeData.FakeAddress.Postcode}"
             };
 
             // LOT & StreetNumber
