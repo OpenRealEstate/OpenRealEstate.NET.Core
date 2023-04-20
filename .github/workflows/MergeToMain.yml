@@ -53,6 +53,12 @@ jobs:
             --api-key ${{ secrets.MYGET_APIKEY }} \
             --source https://www.myget.org/F/openrealestate-net/api/v2/package
 
+      - name: Publish to Feedz.io
+        run: |
+          dotnet nuget push "./artifacts/*.nupkg" \
+            --api-key ${{ secrets.FEEDZ_APIKEY }} \
+            --source https://f.feedz.io/openrealestate/openrealestate/nuget/index.json
+            
   test:
     runs-on: ubuntu-latest
 
